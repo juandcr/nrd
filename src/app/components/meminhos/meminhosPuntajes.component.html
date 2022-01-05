@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h1>Meminhos</h1>
+            <p>Página para ver meminhos</p>
+        </div>
+    </div>
+</div>
+<div class="container table-responsive">    
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Posicion</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Total</th>            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let memero of memeros; let i= index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{memero.nombre}}</td>
+            <td>{{memero.total}}</td>            
+          </tr>          
+        </tbody>
+      </table>
+</div>

@@ -1,0 +1,138 @@
+
+.mastheader{    
+    width: 100%;
+    background-image: url("/assets/img/banner.jpg");
+    background-repeat: no-repeat;    
+}
+
+.translucid{
+    background-color: rgba(255,255,255,0.85);    
+}
+
+.navbar .logo{
+    width: 128px;
+    height: 128px;
+}
+
+.roboto{
+	font-family: 'Roboto', sans-serif;
+}
+.header-text-1{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: bold;
+	font-size: 34px;		
+}
+.header-text-2{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: lighter;
+	font-size: 20px;		
+}
+
+.innerBanner{
+	padding: 3%;
+	filter: grayscale(100%);
+}
+
+.social-media{
+	font-size: 2em;
+	color:red;	
+}
+
+
+
+.top-padding-index{
+	padding-top:2em;
+}
+
+.top-padding-admin{
+	padding-top:5%; 
+}
+
+.txt-index{
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+}
+
+.record-title{
+	font-family: 'Roboto', sans-serif;
+	font-size: 25px;
+	color: gray;
+}
+
+@media (min-width: 768px) {
+	.top-padding-index{
+		padding-top:3em;
+	}
+	
+	.header-text-1{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: bold;
+	font-size: 44px;		
+	}
+	
+	.header-text-2{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: lighter;
+	font-size: 24px;		
+	}
+}
+
+@media (min-width: 992px) {
+	.top-padding-index{
+		padding-top:8em;
+	}
+	
+	.header-text-1{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: bold;
+	font-size: 60px;		
+	}
+	
+	.header-text-2{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: lighter;
+	font-size: 28px;		
+	}
+	
+}
+
+@media (min-width: 1200px) {
+	.top-padding-index{
+		padding-top:12em;
+	}
+	
+	.header-text-1{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: bold;
+	font-size: 80px;		
+	}
+	
+	.header-text-2{
+	font-family: 'Roboto', sans-serif;
+	color:white;
+	font-weight: lighter;
+	font-size: 36px;		
+	}	 
+}
+
+.custom-paginator-li{
+	background-color:#c82333 !important;
+	border-color: #bd2130 !important;	
+}
+
+.colorTextBanner{
+	text-shadow:2px 2px 5px black; 	
+	color: white;
+}
+
+
+.uwu{
+	font-size: 150px;
+}

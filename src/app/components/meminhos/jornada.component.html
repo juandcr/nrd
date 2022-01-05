@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <h1>Meminhos</h1>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Selecciona la jornada que deseas ver</option>
+        {{jornadas}}
+        <option *ngFor="let jornada of jornadas" value="{{jornada.numeroJornada}}">{{jornada.numeroJornada}}</option>    
+      </select>
+    </div>
+  </div>
+</div>
+
