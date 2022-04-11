@@ -1,0 +1,27 @@
+<div class="container mt-5 mb-5">
+    <form #formMeme (ngSubmit)="uploadMeme()">
+        <div class="form-group">
+            <select class="form-select" #selected (change)="onChange(selected.value)" [(ngModel)]="datos.idParticipante" name="idParticipante">
+                <option selected value="default"> Selecciona al participante</option>
+                <option *ngFor="let memero of memeros" value="{{memero.id}}">{{memero.nombre}}</option>
+                <option value="-1">Otro</option>    
+            </select>
+                <input name="participante" *ngIf="otro" type="text" class="form-control mt-3" id="other" placeholder="Ingresa el nombre del nuevo participante" [(ngModel)]="datos.participante">
+        </div>
+
+        <div class="form-group mt-3">
+            <select class="form-select" #jornada (change)="onChangeJornada(jornada.value)" [(ngModel)]="datos.jornada" name="jornadaId">
+                <option selected value="default"> Selecciona la jornada</option>
+                <option *ngFor="let jornada of jornadas" value="{{jornada.numeroJornada}}">{{jornada.numeroJornada}}</option>
+                <option value="-1">Otra</option>    
+            </select>
+                <input *ngIf="otraJornada" type="text" class="form-control mt-3" id="other" placeholder="Ingresa el número de jornada" [(ngModel)]="datos.jornadaNueva" name="otraJornada">
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="image">Imágen</label>
+            <input #imageInput type="file" class="form-control" id="image" accept="image/png, image/jpeg, image/jpg" [(ngModel)]="datos.imagen" name="imagen" (change)="processFile($event)">
+        </div>            
+        <button type="submit" class="btn btn-danger mt-3">{{buttonText}}</button>
+    </form>
+</div>

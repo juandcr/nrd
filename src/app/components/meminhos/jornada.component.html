@@ -2,12 +2,47 @@
   <div class="row mt-2">
     <div class="col-md-12">
       <h1>Meminhos</h1>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Selecciona la jornada que deseas ver</option>
-        {{jornadas}}
+      <div>
+        <p>Visualiza una jornada pasada </p>
+      </div>      
+      <select class="form-select" aria-label="Default select example" #jornada (change)="onChange(jornada.value)">
+        <option selected>Selecciona la jornada que deseas ver</option>        
         <option *ngFor="let jornada of jornadas" value="{{jornada.numeroJornada}}">{{jornada.numeroJornada}}</option>    
-      </select>
+      </select>      
     </div>
+    <div class="col-md-12 mt-5 text-center" *ngIf="showJornada">
+      
+      <div *ngFor="let p of participaciones" class="mt-2">
+        <h1>{{p.memero.nombre}}</h1>        
+        <img src="{{p.urlImg}}" alt="" srcset="" class="img-fluid">
+        <div class="row mt-2"> 
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <p>Calificación</p>
+            <select class="form-select">          
+              <option *ngFor="let calificacion of [1,2,3]" value="{{calificacion}}">{{calificacion}}</option>    
+            </select>
+          </div>
+          <div class="col-md-4"></div>
+          
+          
+        </div>
+        
+        <h3 *ngIf="!surveyIsAble" class="mt-3">Puntuación total: {{p.calificacion}}</h3>
+        <br><br>
+        <hr>
+      </div>      
+    </div>
+
+    
+    <div class="col-md-12  mb-2 text-center" *ngIf="surveyIsAble">
+      <button type="button" class="btn  btn-danger btn-lg "> Votar</button>
+    </div>
+    
+    
+
   </div>
 </div>
+
 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -10,7 +10,8 @@ export class LoginService {
 
   private url= "http://localhost:8080";
   private _usuario:Usuario;
-  private _token:string
+  private _token:string;
+  isAdmin$: Subject<boolean> = new Subject<boolean>();
 
 
   constructor(private http:HttpClient) { }
@@ -20,9 +21,9 @@ export class LoginService {
       return this._token;
     }
     else{
-      return sessionStorage.getItem("token");
+      return localStorage.getItem("jwt");
     }    
-  }
+  }  
 
   guardarUsuario(accessToken:string):void{
     let payload= this.obtenerDatosToken(accessToken)
@@ -44,8 +45,9 @@ export class LoginService {
     }
     return null;
   }
-  login(usuario:Usuario):Observable<any>{
-    const credenciales=btoa('nrd'+ ':'+'12345');
+  
+  getJWTBackend(tokenSocial:string):Observable<any>{
+    /*const credenciales=btoa('nrd'+ ':'+'12345');
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + credenciales
@@ -55,6 +57,12 @@ export class LoginService {
     params.set('username',usuario.username);
     params.set('password',usuario.password);
     return this.http.post<any>(`${this.url}/oauth/token`,params.toString(),{headers:httpHeaders})
+    */
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',      
+    });    
+    return this.http.post<any>(`${this.url}/oauth/google`,{"value":tokenSocial},{headers:httpHeaders})
+    
 
   }
 }

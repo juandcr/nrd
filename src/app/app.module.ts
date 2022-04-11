@@ -11,7 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { JornadaComponent } from './components/meminhos/jornada.component';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { UploadMeminhoComponent } from './components/meminhos/upload-meminho.component';
+import { AdminComponent } from './components/admin/admin.component';
 
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +25,8 @@ import { JornadaComponent } from './components/meminhos/jornada.component';
     MeminhosPuntajesComponent,
     LoginComponent,
     JornadaComponent,
+    UploadMeminhoComponent,
+    AdminComponent,
     
   ],
   imports: [
@@ -28,8 +34,22 @@ import { JornadaComponent } from './components/meminhos/jornada.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    SocialLoginModule,
   ],
-  providers: [],
+  providers: [{
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: true, //keeps the user signed in
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider('196610426824-f1rfgn9opegu90saa5vfma9o847phcsr.apps.googleusercontent.com') // your client id
+        }
+      ]
+    } as SocialAuthServiceConfig,
+  },
+    //AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

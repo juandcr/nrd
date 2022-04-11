@@ -13,12 +13,8 @@ export class MeminhosPuntajesComponent implements OnInit {
   constructor(private meminhosService:MeminhoServiceService) {
     meminhosService.getMemeros().subscribe(resp=>{      
       this.memeros=resp;
-    });
-    
+    });    
    }
-
-  
-
   ngOnInit(): void {
   }
 

@@ -32,7 +32,7 @@ export class MeminhoServiceService {
   getMemeros(){
     return this.http.get(`${this.url}/meminhos/memeros`,{headers:this.agregarAuthroizationHeaders()}).pipe(
       catchError(e=>{
-        this.isNotAuthorized(e);
+        this.isNotAuthorized(e);        
         return throwError(()=>new Error('No autorizado'));
       })
     );
@@ -48,4 +48,50 @@ export class MeminhoServiceService {
     );
   }
 
+  getJornadaStatus(numberJornada:number){
+    return this.http.get(`${this.url}/meminhos/jornadas/survey/${numberJornada}/status`).pipe(
+      catchError(e=>{
+        this.isNotAuthorized(e);
+        return throwError(()=>new Error('No autorizado'));
+      })
+    );
+  }
+
+
+  getParticipaciones(jornada:number){
+    return this.http.get(`${this.url}/meminhos/jornadas/${jornada}`).pipe(
+      catchError(e=>{
+        this.isNotAuthorized(e);        
+        return throwError(()=>new Error('No autorizado'));
+      })
+    );
+  }
+
+  createMemero(nombre:string){
+    /*const credenciales=btoa('nrd'+ ':'+'12345');
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + credenciales
+    });
+    let params=new URLSearchParams();
+    params.set('grant_type','password');
+    params.set('username',usuario.username);
+    params.set('password',usuario.password);
+    return this.http.post<any>(`${this.url}/oauth/token`,params.toString(),{headers:httpHeaders})
+    */    
+    let params=new URLSearchParams();    
+    params.set('nombre',nombre);
+    params.set('total',"0");    
+    return this.http.post(`${this.url}/meminhos/memero`,{"nombre":nombre,"total":0},{headers:this.agregarAuthroizationHeaders()});
+  }
+  uploadMeme(form:any){
+
+    const formData= new FormData();
+    formData.append('image',form.image);
+    formData.append('temporada',form.temporada);
+    formData.append('jornada',form.jornada);
+
+    return this.http.post(`${this.url}/meminhos/memero/${form.id}/upload`,formData,
+    {headers:new HttpHeaders({'Authorization':'Bearer '+ this.loginService.token})});
+  }
 }
