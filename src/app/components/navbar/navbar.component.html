@@ -1,54 +1,70 @@
 <header class="mastheader">
 
-    <nav class="navbar navbar-expand-lg navbar-light translucid">
-      
-        <div class ="container">
-            <a [routerLink]="['']">
-                <img alt="" src="/assets/img/logo.png" class="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['']" >Inicio </a>
+  <nav class="navbar navbar-expand-lg navbar-light translucid">
+    
+      <div class ="container">
+          <a [routerLink]="['']">
+              <img alt="" src="/assets/img/logo.png" class="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+              <li class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" [routerLink]="['']" >Inicio </a>
+              </li>
+              
+              <li class="nav-item dropdown" routerLinkActive="active">                    
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMeminhos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Meminhos
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMeminhos">
+                    <li *ngIf="isAdmin"><a  class="dropdown-item" [routerLink]="['meminhos/crear']"> Cargar Meminho</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['meminhos/puntajes']">Puntajes</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['meminhos/jornadas']">Jornadas</a></li>
+                  </ul>
+                </li>
+
+
+                <li class="nav-item dropdown" routerLinkActive="active">                    
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMeminhos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Lingarditos
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMeminhos">
+                    <li *ngIf="isAdmin"><a  class="dropdown-item" [routerLink]="['lingarditos/jornada/crear']"> Crear Lingarditos</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['lingarditos/jornada']">Votar jornada actual</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['lingarditos/jornada/resultados']">Resultados</a></li>
+                  </ul>
+                </li>
+
+                <li  *ngIf="isAdmin" class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" [routerLink] ="['lingarditos/jornada/crear']">Lingarditos</a>
                 </li>
                 
-                <li class="nav-item dropdown" routerLinkActive="active">                    
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMeminhos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Meminhos
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMeminhos">
-                      <li *ngIf="isAdmin"><a  class="dropdown-item" [routerLink]="['meminhos/crear']"> Cargar Meminho</a></li>
-                      <li><a class="dropdown-item" [routerLink]="['meminhos/puntajes']">Puntajes</a></li>
-                      <li><a class="dropdown-item" [routerLink]="['meminhos/jornadas']">Jornadas</a></li>
-                    </ul>
-                  </li>
-                  
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" >Noticias</a>
-                  </li>                  
-                  
-                  <li  *ngIf="isAdmin" class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" >Admin</a>
-                  </li>                  
+                <li class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" >Noticias</a>
+                </li>                  
+                
+                <li  *ngIf="isAdmin" class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" [routerLink] ="['admin']">Admin</a>
+                </li>                  
 
-                  <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" >Tienda</a>
-                  </li>         
-                  
-                </ul>                
-              </div>
-              <ul class="navbar-nav navbar-right">                  
-                <li *ngIf="isLogged"> <img src="{{usuario.photoUrl}}" class="rounded-circle mr-3" style="width:50px" alt="" srcset=""></li>
-                <li><p> &nbsp;&nbsp;&nbsp;</p> </li>
-                <li *ngIf="!isLogged"><a [routerLink]="['login']" class="btn btn-outline-danger">Login</a></li>
-                <li *ngIf="isLogged"><a (click)="logout()" class="btn btn-outline-danger">Logout</a></li>
-              </ul>              
-        </div>
-        
-      </nav>
+                <li class="nav-item" routerLinkActive="active">
+                  <a class="nav-link" >Tienda</a>
+                </li>         
+                
+              </ul>                
+            </div>
+            <ul class="navbar-nav navbar-right">                  
+              <li *ngIf="isLogged"> <img src="{{usuario.photoUrl}}" class="rounded-circle mr-3" style="width:50px" alt="" srcset=""></li>
+              <li><p> &nbsp;&nbsp;&nbsp;</p> </li>
+              <li *ngIf="!isLogged"><a [routerLink]="['login']" class="btn btn-outline-danger">Login</a></li>
+              <li *ngIf="isLogged"><a (click)="logout()" class="btn btn-outline-danger">Logout</a></li>
+            </ul>              
+      </div>
       
+    </nav>
+    
 
 </header>

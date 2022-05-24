@@ -73,19 +73,36 @@ export class UploadMeminhoComponent implements OnInit {
     }
     temporada='2021-2022';
 
-    if(this.otro){      
-      console.log("creando memero",this.datos.participante);
-      this.memeroService.createMemero(this.datos.participante).subscribe((resp:any)=>{        
-        id=resp.participante.id;        
-        this.memeroService.uploadMeme({"image":this.file,"temporada":temporada,"jornada":jornada,"id":id}).subscribe(resp=>{          
-        });
-        this.alertSuccess('Participación registrada');
-      });
+    if(this.otro){
+      this.memeroService.createMemero(this.datos.participante).subscribe({
+        next:(resp:any)=>{
+          id= resp.participante.id;
+          this.memeroService.uploadMeme({"image":this.file,"temporada":temporada,"jornada":jornada,"id":id}).subscribe(resp=>{});
+          this.alertSuccess('Participación registrada');
+        },
+        error:(e)=>{
+          console.log(e)
+          if(e.status==500){
+            this.alertFailure("Problema al crear al nuevo participante");
+          }
+        }
+      })
+      
     }
     else{ //ya existía el memero      
       id=this.datos.idParticipante;      
-      this.memeroService.uploadMeme({"image":this.file,"temporada":temporada,"jornada":jornada,"id":id}).subscribe(resp=>{
-        this.alertSuccess('Participación registrada');
+      this.memeroService.uploadMeme({"image":this.file,"temporada":temporada,"jornada":jornada,"id":id}).subscribe({
+        next: (resp)=> this.alertSuccess('Participación registrada'),
+        error: (e)=>{          
+          if (e.status==409){
+            this.alertFailure(e.error.mensaje);
+          }
+          if(e.status==500){            
+            this.alertFailure("No se pudo cargar la foto debido a que excede el tamaño de archivo");
+          }
+
+        },
+        complete: ()=>console.log("finished")
       });
     }   
     
@@ -99,6 +116,14 @@ export class UploadMeminhoComponent implements OnInit {
     Swal.fire(
       `${message}`
     );
+  }
+
+  alertFailure(message:string){
+    Swal.fire({
+      icon: 'error',
+      title: 'Ha sucedido una Bissakeada',
+      text: `${message}`
+    });
   }
 
 }

@@ -15,8 +15,7 @@ export class JornadaComponent implements OnInit {
   surveyIsAble:boolean;  
   constructor(private meminhoService:MeminhoServiceService) { }
 
-  ngOnInit(): void {    
-    
+  ngOnInit(): void {
     this.meminhoService.getJornadas().subscribe(resp=>{
       this.jornadas=resp;
     })

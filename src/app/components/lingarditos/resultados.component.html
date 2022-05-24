@@ -1,0 +1,18 @@
+
+<div class="container">
+    <h1 class="mt-4">Resultados Lingarditos</h1>
+    <div class="row mt-3 mb-2">
+        <div class="col-md-12">
+            <select class="form-select w-20" #jornada (change)="onChange(jornada.value)">
+                <option selected> Selecciona una jornada para ver los resultados </option>                
+                <option *ngFor="let jornada of jornadas" value="{{jornada.id}}">{{jornada.titulo}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+      
+        
+            
+        
+    

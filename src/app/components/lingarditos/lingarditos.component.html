@@ -1,0 +1,28 @@
+<div class="container  mt-5 text-center">
+    <h1> {{titulo}}</h1>
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Dorsal</th>
+            <th scope="col">Jugador</th>
+            <th scope="col">calificación</th>            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let player of players">
+            <th scope="row">{{player.number}}</th>
+            <td> <b> {{player.name}} </b></td>
+            <td>
+                <select class="form-select w-20" #voto (change)="onChange(voto.value,player)">
+                    <option selected> Selecciona calificación </option>
+                    <option *ngFor="let calificacion of [1,2,3,4,5,6,7,8,9,10]" value="{{calificacion}}">{{calificacion}}</option>    
+                </select>
+            </td>            
+          </tr>          
+        </tbody>
+      </table>
+
+      <input class="btn btn-block btn-danger mb-4" value="Votar" (click)="votar()">
+</div>

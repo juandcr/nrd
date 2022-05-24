@@ -14,6 +14,9 @@ import { JornadaComponent } from './components/meminhos/jornada.component';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { UploadMeminhoComponent } from './components/meminhos/upload-meminho.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { LingarditosComponent } from './components/lingarditos/lingarditos.component';
+import { CreateLingarditoComponent } from './components/lingarditos/create-lingardito.component';
+import { ResultadosComponent } from './components/lingarditos/resultados.component';
 
  
 @NgModule({
@@ -27,7 +30,9 @@ import { AdminComponent } from './components/admin/admin.component';
     JornadaComponent,
     UploadMeminhoComponent,
     AdminComponent,
-    
+    LingarditosComponent,
+    CreateLingarditoComponent,
+    ResultadosComponent    
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,28 @@
-<p>admin works!</p>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Panel de administración </h1>
+            <p>Selecciona y activa o desactiva la votación de una jornada de meminhos</p>
+            <table class="table">
+                <thead>
+                  <tr>                    
+                    <th scope="col">jornada</th>
+                    <th scope="col">estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let jornada of jornadas">                    
+                    <td>{{jornada.numeroJornada}}</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" [checked]="jornada.enableSurvey"  [value]="jornada.numeroJornada" (change)="onChange($event)">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>                    
+                  </tr>                  
+                </tbody>
+              </table>
+            
+        </div>
+    </div>
+</div>

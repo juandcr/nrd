@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { catchError, retry, throwError } from 'rxjs';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -90,7 +90,6 @@ export class MeminhoServiceService {
     formData.append('image',form.image);
     formData.append('temporada',form.temporada);
     formData.append('jornada',form.jornada);
-
     return this.http.post(`${this.url}/meminhos/memero/${form.id}/upload`,formData,
     {headers:new HttpHeaders({'Authorization':'Bearer '+ this.loginService.token})});
   }

@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <h1 class="mb-3">Selecciona los jugadores que formarán parte de la votación</h1>
+            <button class="btn btn-danger mb-3" (click)="getLastLingardito()">Copiar jornada anterior</button>
+            <div class="form-group">
+              <label for="titulo" >Título</label>
+              <input type="text" class="form-control" id="titulo" [(ngModel)]="titulo" />
+            </div>
+            
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width:5%" scope="col">Seleccionar</th>
+                    <th style="width:95%" scope="col">Jugador</th>                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor = "let player of allPlayers">
+                    <th scope="row">
+                      <input #value (click)="onChange($event,player)" class="form-check-input" type="checkbox" name="{{player.name}}" id="{{player.id}}" [(ngModel)]="player.checked" checked="{{player.checked}}" >
+                    </th>
+                    <td> <label class="form-check-label" for="{{player.id}}"> - {{player.name}} </label></td>
+                    
+                  </tr>          
+                </tbody>
+              </table>
+
+            <button class="btn btn-danger mb-3" (click)="createLingarditos()">Crear jornada</button>
+        </div>
+    </div>
+</div>
+
