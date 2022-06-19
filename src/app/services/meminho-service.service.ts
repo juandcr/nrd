@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, retry, throwError } from 'rxjs';
 import { LoginService } from './login.service';
-
+import { host } from '../constants';
 @Injectable({
   providedIn: 'root'
 })
 export class MeminhoServiceService {
 
-  private url= "http://localhost:8080";
+  private url= host;
   private httpHeaders  = new HttpHeaders({'Content-Type': 'application/json'});
   private isNotAuthorized(e:any):boolean{
     if (e.status==401|| e.status==403){
@@ -67,18 +67,7 @@ export class MeminhoServiceService {
     );
   }
 
-  createMemero(nombre:string){
-    /*const credenciales=btoa('nrd'+ ':'+'12345');
-    const httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + credenciales
-    });
-    let params=new URLSearchParams();
-    params.set('grant_type','password');
-    params.set('username',usuario.username);
-    params.set('password',usuario.password);
-    return this.http.post<any>(`${this.url}/oauth/token`,params.toString(),{headers:httpHeaders})
-    */    
+  createMemero(nombre:string){   
     let params=new URLSearchParams();    
     params.set('nombre',nombre);
     params.set('total',"0");    

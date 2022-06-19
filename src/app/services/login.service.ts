@@ -2,13 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
-
+import { host } from '../constants';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private url= "http://localhost:8080";
+  private url= host;
   private _usuario:Usuario;
   private _token:string;
   isAdmin$: Subject<boolean> = new Subject<boolean>();

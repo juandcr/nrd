@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Jornada } from '../models/jornada.model';
 import { LoginService } from './login.service';
+import { host } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LingarditoService {
 
-  private url= "http://localhost:8080";
+  private url= host;
   private httpHeaders  = new HttpHeaders({'Content-Type': 'application/json'});
   private isNotAuthorized(e:any):boolean{
     if (e.status==401|| e.status==403){
