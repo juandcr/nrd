@@ -1,3 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
+    </div>
+    
+</div>
+
+
 
 <div class="container">
     <h1 class="mt-4">Resultados Lingarditos</h1>
@@ -7,6 +17,33 @@
                 <option selected> Selecciona una jornada para ver los resultados </option>                
                 <option *ngFor="let jornada of jornadas" value="{{jornada.id}}">{{jornada.titulo}}</option>
             </select>
+        </div>
+    </div>
+    <div class="row" *ngFor="let resultado of resultados">
+        <div class="col-md-6">            
+            <p>Jugador: {{resultado.player}}</p>            
+            <p>Calificaciones</p>
+            <p *ngFor="let item of resultado.labels">
+                {{item}} 
+            </p>
+            <p *ngFor="let item of resultado.data">
+                {{item}} 
+            </p>
+            
+        </div>
+        <div class="col-md-6">
+            <div style="display: block;">
+            <canvas mdbChart
+              [chartType]="chartType"
+              [datasets]="resultado.data"
+              [labels]="resultado.labels"
+              [colors]="chartColors"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>
         </div>
     </div>
 </div>

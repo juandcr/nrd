@@ -17,7 +17,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { LingarditosComponent } from './components/lingarditos/lingarditos.component';
 import { CreateLingarditoComponent } from './components/lingarditos/create-lingardito.component';
 import { ResultadosComponent } from './components/lingarditos/resultados.component';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
  
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { ResultadosComponent } from './components/lingarditos/resultados.compone
     HttpClientModule,
     FormsModule,
     SocialLoginModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

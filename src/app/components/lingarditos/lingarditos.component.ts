@@ -30,8 +30,9 @@ export class LingarditosComponent implements OnInit {
   votar(){    
     let voto:Vote={players:[]};
     let complete=true;
-    this.players.forEach(p=>{
-      if (!p.calificacion){
+    this.players.forEach(p=>{      
+      if (!p.calificacion){        
+        console.log("entre");
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -45,11 +46,15 @@ export class LingarditosComponent implements OnInit {
         let vote:VotePlayer={id:p.id,name:p.name,rate:p.calificacion};             
         voto.players.push(vote);        
       });
-    }      
-    console.log(voto)
-    this.lingarditosService.voteJornadaLingardito(voto,this.id).subscribe(resp=>{
-      console.log(resp);
-    })
+      this.lingarditosService.voteJornadaLingardito(voto,this.id).subscribe(resp=>{
+        Swal.fire(
+          'Voto registrado!',
+          'SIUUUU!',
+          'success'
+        );        
+      });
+    }
+    
   }
   
   onChange(calificacion:string, player:any){
