@@ -81,7 +81,11 @@ export class LingarditoService {
 
   voteJornadaLingardito(body:any,jornadaId:number){
     return this.http.post(`${this.url}/lingarditos/jornada/votar/${jornadaId}`,body,{headers:this.agregarAuthroizationHeaders()});
+  }
 
+  toggleLingardito(){
+    return this.http.post(`${this.url}/admin/toggle/lingardito`,{},
+    {headers:new HttpHeaders({'Authorization':'Bearer '+ this.loginService.token})});
   }
 }
 

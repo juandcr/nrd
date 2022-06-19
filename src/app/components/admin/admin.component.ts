@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JornadaService } from 'src/app/services/jornada.service';
+import { LingarditoService } from 'src/app/services/lingardito.service';
 import { MeminhoServiceService } from 'src/app/services/meminho-service.service';
 
 @Component({
@@ -9,18 +10,21 @@ import { MeminhoServiceService } from 'src/app/services/meminho-service.service'
 })
 export class AdminComponent implements OnInit {
 
-  jornadas:any;
+  //jornadas:any;
+  lastestLingardito:any;
 
-  constructor(private meminhoService:MeminhoServiceService, private jornadaService:JornadaService) { }
+  constructor(private meminhoService:MeminhoServiceService, private jornadaService:JornadaService,private lingarditoService:LingarditoService) { }
 
   ngOnInit(): void {
-    this.meminhoService.getJornadas().subscribe(resp=>{
+    /*this.meminhoService.getJornadas().subscribe(resp=>{
       this.jornadas=resp;      
-    });
+    });*/
+    this.lingarditoService.getLastLingardito().subscribe((resp: any)=>{this.lastestLingardito=resp});
   }
 
   onChange(e:any){
-    this.jornadaService.toggleStatusJornadaSurvey(e.target.value).subscribe(resp=>{});
+    //this.jornadaService.toggleStatusJornadaSurvey(e.target.value).subscribe(resp=>{});
+    this.lingarditoService.toggleLingardito().subscribe(resp=>{});
   }
 
 }

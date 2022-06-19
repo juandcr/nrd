@@ -15,8 +15,10 @@ export class LingarditosComponent implements OnInit {
   id=0;
   players:[{id:number,name:string,number:number,calificacion:0}];
   titulo:string
+  open:boolean
   constructor(private lingarditosService:LingarditoService) {     
-    lingarditosService.getLastLingardito().subscribe((resp: { jornada: {id:number,titulo:string,jugadores:[{id:number,name:string,number:number,calificacion:0}]}})=>{
+    lingarditosService.getLastLingardito().subscribe((resp: { jornada: {id:number,titulo:string,active:boolean,jugadores:[{id:number,name:string,number:number,calificacion:0}]}})=>{
+      this.open= resp.jornada.active;
       this.players=resp.jornada.jugadores;
       this.titulo= resp.jornada.titulo;
       this.id=resp.jornada.id;

@@ -19,21 +19,12 @@
             </select>
         </div>
     </div>
-    <div class="row" *ngFor="let resultado of resultados">
-        <div class="col-md-6">            
-            <p>Jugador: {{resultado.player}}</p>            
-            <p>Calificaciones</p>
-            <p *ngFor="let item of resultado.labels">
-                {{item}} 
-            </p>
-            <p *ngFor="let item of resultado.data">
-                {{item}} 
-            </p>
-            
-        </div>
-        <div class="col-md-6">
-            <div style="display: block;">
-            <canvas mdbChart
+    <div class="row " *ngFor="let resultado of resultados">        
+        <div class="col-md-4"></div>
+        <div class="col-md-4 mt-5">
+            <div style="display: block; ">
+                <p>{{resultado.player}}</p>
+            <canvas  mdbChart
               [chartType]="chartType"
               [datasets]="resultado.data"
               [labels]="resultado.labels"
@@ -44,7 +35,9 @@
               (chartClick)="chartClicked($event)">
             </canvas>
           </div>
+          <hr>
         </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 
