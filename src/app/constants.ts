@@ -1,1 +1,1 @@
-export const host="https://nrd-backend.herokuapp.com/"
+export const host="https://nrd-backend.herokuapp.com"
