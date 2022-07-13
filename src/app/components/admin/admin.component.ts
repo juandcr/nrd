@@ -11,7 +11,7 @@ import { MeminhoServiceService } from 'src/app/services/meminho-service.service'
 export class AdminComponent implements OnInit {
 
   //jornadas:any;
-  lastestLingardito:any;
+  active:boolean;
 
   constructor(private meminhoService:MeminhoServiceService, private jornadaService:JornadaService,private lingarditoService:LingarditoService) { }
 
@@ -19,7 +19,10 @@ export class AdminComponent implements OnInit {
     /*this.meminhoService.getJornadas().subscribe(resp=>{
       this.jornadas=resp;      
     });*/
-    this.lingarditoService.getLastLingardito().subscribe((resp: any)=>{this.lastestLingardito=resp});
+    this.lingarditoService.getLastLingardito().subscribe((resp: any)=>{
+      console.log(resp.jornada.active);
+      this.active=resp.jornada.active;
+    });
   }
 
   onChange(e:any){
