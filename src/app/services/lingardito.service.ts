@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Jornada } from '../models/jornada.model';
+import { urlBackend } from '../config';
 import { LoginService } from './login.service';
 import { host } from '../constants';
 
@@ -11,7 +11,7 @@ import { host } from '../constants';
 })
 export class LingarditoService {
 
-  private url= host;
+  private url= urlBackend;
   private httpHeaders  = new HttpHeaders({'Content-Type': 'application/json'});
   private isNotAuthorized(e:any):boolean{
     if (e.status==401|| e.status==403){
@@ -33,20 +33,7 @@ export class LingarditoService {
 
   new= new Map();
 
-  players=[
-    {name:'Bruno Fernandes', id: 18,calificacion:0},
-    {name:'David De Gea', id: 1, calificacion:0},
-    {name:'Harry Maguire', id: 5,calificacion:0},
-    {name:'Rafa Varane', id: 19,calificacion:0},
-    {name:'Diogo Dalot', id: 20,calificacion:0},
-    {name:'Alex Telles', id: 27,calificacion:0},
-    {name:'Scot McToiminay', id: 39,calificacion:0},
-    {name:'Fred', id: 17,calificacion:0},
-    {name:'Cristiano Ronaldo', id: 7,calificacion:0},
-    {name:'Jadon Sancho', id: 25,calificacion:0},
-    {name:'Elanga', id: 36,calificacion:0},
-  ];
-
+  
   constructor(private http:HttpClient,private router:Router,private loginService:LoginService) { }
 
   getJornadas(){
@@ -59,10 +46,7 @@ export class LingarditoService {
   getLastLingardito():any{
     return this.http.get(`${this.url}/lingarditos/jornada/actual`,{headers:this.agregarAuthroizationHeaders()});    
   }
-  getPlayers(){    
-    return this.players;
-  }
-
+  
   getAllPlayers():Observable<any>{
     return this.http.get(`${this.url}/lingarditos/players`,{headers:this.agregarAuthroizationHeaders()}).pipe(
       catchError(e=>{

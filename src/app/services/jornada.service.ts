@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { urlBackend } from '../config';
 import { LoginService } from './login.service';
 import { host } from '../constants';
 @Injectable({
@@ -8,7 +9,7 @@ import { host } from '../constants';
 })
 export class JornadaService {
 
-  private url= host;
+  private url= urlBackend;
   private httpHeaders  = new HttpHeaders({'Content-Type': 'application/json'});
   private isNotAuthorized(e:any):boolean{
     if (e.status==401|| e.status==403){
