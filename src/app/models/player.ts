@@ -1,0 +1,1 @@
+export interface Player { name: any; id: any; }
