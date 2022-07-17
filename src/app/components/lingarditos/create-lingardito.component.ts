@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from 'src/app/models/player';
 import { LingarditoService } from 'src/app/services/lingardito.service';
 import Swal from 'sweetalert2';
 import { alertFailure } from '../alertsUtils/alertUtils'
@@ -9,7 +10,7 @@ import { alertFailure } from '../alertsUtils/alertUtils'
 })
 export class CreateLingarditoComponent implements OnInit {
 
-  allPlayers: any;
+  allPlayers= new Array();
   map = new Map();
   allPlayers2 = new Array();
   titulo = ""
@@ -17,11 +18,9 @@ export class CreateLingarditoComponent implements OnInit {
 
   constructor(private lingarditoService: LingarditoService) {
     lingarditoService.getAllPlayers().subscribe(res => {
-      res.players.forEach((p: { name: any; id: any; }) => {
-        let test = { name: p.name, id: p.id, checked: false }
-        this.allPlayers2.push(test);
-      })
-      this.allPlayers = this.allPlayers2;
+      res.players.forEach((p: Player) => {        
+        this.allPlayers.push({ name: p.name, id: p.id, checked: false });
+      });      
     });
   }
 
