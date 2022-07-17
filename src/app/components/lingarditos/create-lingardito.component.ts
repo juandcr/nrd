@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LingarditoService } from 'src/app/services/lingardito.service';
 import Swal from 'sweetalert2';
-import { JornadaComponent } from '../meminhos/jornada.component';
 
 @Component({
   selector: 'app-create-lingardito',

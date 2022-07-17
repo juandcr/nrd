@@ -6,13 +6,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MeminhosPuntajesComponent } from './components/meminhos/meminhosPuntajes.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { JornadaComponent } from './components/meminhos/jornada.component';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
-import { UploadMeminhoComponent } from './components/meminhos/upload-meminho.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LingarditosComponent } from './components/lingarditos/lingarditos.component';
 import { CreateLingarditoComponent } from './components/lingarditos/create-lingardito.component';
@@ -24,11 +21,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent,
-    MeminhosPuntajesComponent,
-    LoginComponent,
-    JornadaComponent,
-    UploadMeminhoComponent,
+    FooterComponent,    
+    LoginComponent,    
     AdminComponent,
     LingarditosComponent,
     CreateLingarditoComponent,
