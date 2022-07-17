@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { LingarditoService } from 'src/app/services/lingardito.service';
 import { Vote, VotePlayer } from '../models/players.model';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
+import { alertFailure } from '../alertsUtils/alertUtils';
+
 
 @Component({
   selector: 'app-lingarditos',
@@ -16,14 +19,26 @@ export class LingarditosComponent implements OnInit {
   players:[{id:number,name:string,number:number,calificacion:0}];
   titulo:string
   open:boolean
-  constructor(private lingarditosService:LingarditoService) {     
-    lingarditosService.getLastLingardito().subscribe((resp: { jornada: {id:number,titulo:string,active:boolean,jugadores:[{id:number,name:string,number:number,calificacion:0}]}})=>{
+  constructor(private lingarditosService:LingarditoService, private spinner: NgxSpinnerService) {
+    this.spinner.show();
+    lingarditosService.getLastLingardito().subscribe({
+      next:(resp: { jornada: {id:number,titulo:string,active:boolean,jugadores:[{id:number,name:string,number:number,calificacion:0}]}})=>{
       this.open= resp.jornada.active;
       this.players=resp.jornada.jugadores;
       this.titulo= resp.jornada.titulo;
       this.id=resp.jornada.id;
-      console.log(this.titulo, this.players);
-    })
+      this.spinner.hide();
+      },
+      error: (e: any) => {
+        if (e.status == 500) {
+          alertFailure("Error en el servidor, favor de contactar al desarrollador");
+        }
+        else {
+          alertFailure(e.error.mensaje);          
+        }
+      }
+
+    });
   }
 
   ngOnInit(): void {
@@ -43,20 +58,30 @@ export class LingarditosComponent implements OnInit {
         complete=false;        
       }
     });
+
     if (complete){
       this.players.forEach(p=>{
         let vote:VotePlayer={id:p.id,name:p.name,rate:p.calificacion};             
         voto.players.push(vote);        
       });
-      this.lingarditosService.voteJornadaLingardito(voto,this.id).subscribe(resp=>{
-        Swal.fire(
-          'Voto registrado!',
-          'SIUUUU!',
-          'success'
-        );        
-      });
-    }
-    
+      this.lingarditosService.voteJornadaLingardito(voto,this.id).subscribe({
+        next:(resp)=>{
+          Swal.fire(
+            'Voto registrado!',
+            'SIUUUU!',
+            'success'
+          );        
+        },
+        error: (e)=>{
+          if (e.status == 500) {
+            alertFailure("Error en el servidor, favor de contactar al desarrollador");
+          }
+          else {            
+            alertFailure(e.error.mensaje);
+          }
+        }
+      });      
+    }    
   }
   
   onChange(calificacion:string, player:any){

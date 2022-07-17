@@ -2,6 +2,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Jornada } from 'src/app/models/jornada.model';
 import { LingarditoService } from 'src/app/services/lingardito.service';
+import { alertFailure } from '../alertsUtils/alertUtils';
 import { Resultado, Resultados } from '../models/resultados.model';
 
 @Component({
@@ -14,12 +15,6 @@ export class ResultadosComponent implements OnInit {
   resultados:Resultados[]
 
   chartType = 'pie';
-
-  chartDatasets = [
-    { data: [300, 50, 100], label: 'My First dataset' }
-  ];
-
-  //chartLabels = ['1', '2', '3'];
 
   chartColors = [
     {
@@ -44,8 +39,18 @@ export class ResultadosComponent implements OnInit {
   jornadas:Jornada[]
 
   constructor(private lingarditosService:LingarditoService) { 
-    lingarditosService.getJornadas().subscribe((resp:any)=>{
-      this.jornadas=resp.jornadas;      
+    lingarditosService.getJornadas().subscribe({
+      next:(resp:any)=>{
+        this.jornadas=resp.jornadas;      
+      },
+      error:(e)=>{
+        if (e.status == 500) {
+          alertFailure("Error en el servidor, favor de contactar al desarrollador" + e.error.message);
+        }
+        else {
+          alertFailure(e.error.mensaje);
+        }
+      }
     });    
   }
 
@@ -53,14 +58,22 @@ export class ResultadosComponent implements OnInit {
   }
 
   onChange(jornadaId:string){    
-    this.lingarditosService.getJornadaById(jornadaId).subscribe((resp:any)=>{      
-      this.resultados=resp.jornada;
-      console.log(this.resultados);
-      this.resultados.forEach(r=>{
-        console.log(r);
+    this.lingarditosService.getJornadaById(jornadaId).subscribe({
+      next:(resp:any)=>{      
+      this.resultados=resp.jornada;      
+      this.resultados.forEach(r=>{        
         r.data=[{data:Object.values(r.ratings),label:r.player}]
         r.labels=Object.keys(r.ratings);        
       });      
+    },
+      error:(e)=>{
+        if (e.status == 500) {
+          alertFailure("Error en el servidor, favor de contactar al desarrollador" + e.error.message);
+        }
+        else {
+          alertFailure(e.error.mensaje);
+        }
+      }    
     });    
   }
 }

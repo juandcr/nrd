@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,9 @@ import { LingarditosComponent } from './components/lingarditos/lingarditos.compo
 import { CreateLingarditoComponent } from './components/lingarditos/create-lingardito.component';
 import { ResultadosComponent } from './components/lingarditos/resultados.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
  
 @NgModule({
   declarations: [
@@ -34,8 +37,11 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     HttpClientModule,
     FormsModule,
     SocialLoginModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],  
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
