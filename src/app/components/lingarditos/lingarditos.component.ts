@@ -5,6 +5,7 @@ import { Vote, VotePlayer } from '../models/players.model';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { alertFailure } from '../alertsUtils/alertUtils';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,19 +20,23 @@ export class LingarditosComponent implements OnInit {
   players:[{id:number,name:string,number:number,calificacion:0}];
   titulo:string
   open:boolean
-  constructor(private lingarditosService:LingarditoService, private spinner: NgxSpinnerService) {
-    //this.spinner.show();
+  constructor(private lingarditosService:LingarditoService, private spinner: NgxSpinnerService, private router: Router) {
+    this.spinner.show();
     lingarditosService.getLastLingardito().subscribe({
       next:(resp: { jornada: {id:number,titulo:string,active:boolean,jugadores:[{id:number,name:string,number:number,calificacion:0}]}})=>{
       this.open= resp.jornada.active;
       this.players=resp.jornada.jugadores;
       this.titulo= resp.jornada.titulo;
       this.id=resp.jornada.id;
-      //this.spinner.hide();
+      this.spinner.hide();
       },
       error: (e: any) => {
         if (e.status == 500) {
           alertFailure("Error en el servidor, favor de contactar al desarrollador");
+        }
+        else if( e.status==401 ){
+          alertFailure("Se requiere iniciar sesión para poder votar")
+          router.navigate(['/login'])
         }
         else {
           alertFailure(e.error.mensaje);          
@@ -70,7 +75,8 @@ export class LingarditosComponent implements OnInit {
             'Voto registrado!',
             'SIUUUU!',
             'success'
-          );        
+          );      
+          this.router.navigate(['/lingarditos/jornada/resultados']);            
         },
         error: (e)=>{
           if (e.status == 500) {
