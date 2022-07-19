@@ -23,38 +23,10 @@ export class AdminComponent implements OnInit {
   constructor(private router:Router,private socialAuthService:SocialAuthService,private jornadaService:JornadaService,private lingarditoService:LingarditoService, private loginService:LoginService, ) { }
 
   ngOnInit(): void {        
-
-    if (localStorage.getItem("jwt")){
-      let jwt=localStorage.getItem("jwt");
-      this.isAdmin=this.checkAdmin(jwt);
-    }
-    else{
-      console.log("no esta logeado")
-      alertFailure("Se necesitan permisos de administrador para ver esta página");
-      this.router.navigate(['/login']);
-    }
-    
-    this.socialAuthService.authState.subscribe(data=>{
-      this.usuario=data;
-      this.isLogged=(this.usuario!=null);
-    }) 
-    
-    this.loginService.isAdmin$.subscribe(resp=>{      
-      this.isAdmin=resp;
-      console.log(this.isAdmin)
-      if (this.isAdmin){
-        this.lingarditoService.getLastLingardito().subscribe((resp: any)=>{      
-          this.active=resp.jornada.active;
-          console.log("si es admin")
-        });
-      }
-      else{
-        console.log("no es admin")
-        alertFailure("Se necesitan permisos de administrador para ver esta página");
-        this.router.navigate(['/']);
-      }
-    })
-    
+   
+    this.lingarditoService.getLastLingardito().subscribe((resp: any)=>{      
+      this.active=resp.jornada.active;    
+    });   
   }
 
   onChange(e:any){    
@@ -66,8 +38,6 @@ export class AdminComponent implements OnInit {
     }
     else{
       return false;
-    }
-    
+    }    
   }
-
 }
