@@ -13,31 +13,13 @@ import { alertFailure } from '../alertsUtils/alertUtils';
 })
 export class AdminComponent implements OnInit {
 
-  //jornadas:any;
-  active:boolean;
-  isAdmin:boolean;
-
-  usuario:SocialUser;  
-  isLogged:boolean;
   
-  constructor(private router:Router,private socialAuthService:SocialAuthService,private jornadaService:JornadaService,private lingarditoService:LingarditoService, private loginService:LoginService, ) { }
+  constructor() { }
 
   ngOnInit(): void {        
    
-    this.lingarditoService.getLastLingardito().subscribe((resp: any)=>{      
-      this.active=resp.jornada.active;    
-    });   
+    
   }
-
-  onChange(e:any){    
-    this.lingarditoService.toggleLingardito().subscribe(resp=>{});
-  }
-  checkAdmin(jwt:string|null):boolean{
-    if (jwt){
-      return JSON.parse(atob(jwt.split(".")[1])).elevated;
-    }
-    else{
-      return false;
-    }    
-  }
+  
+  
 }

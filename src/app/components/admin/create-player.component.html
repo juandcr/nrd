@@ -1,0 +1,19 @@
+
+<form>
+    <div class="form-group">
+      <label for="name">Nombre jugador</label>
+      <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Nombre" [(ngModel)]="newPlayer.name" name="name">
+      <small id="nameHelp" class="form-text text-muted">Nombre o apodo del jugador, así se verá en las votaciones</small>
+    </div>
+    <div class="form-group">
+      <label>Posicion</label>
+      <select class="form-select w-20" [(ngModel)]="newPlayer.role" name="role">                 
+        <option *ngFor="let role of roles" value="{{role}}">{{role}}</option>
+    </select>      
+    </div>
+    <div class="form-group">
+        <label for="name">Número dorsal</label>
+        <input type="number" class="form-control" id="name" placeholder="Número de dorsal" [(ngModel)]="newPlayer.number" name="number">
+      </div>
+    <button type="submit" class="btn btn-primary" (click)="crear()">Crear</button>
+</form>

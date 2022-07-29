@@ -17,6 +17,8 @@ import { ResultadosComponent } from './components/lingarditos/resultados.compone
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CreatePlayerComponent } from './components/admin/create-player.component';
+import { ToggleSurveyComponent } from './components/admin/toggle-survey.component';
 
  
 @NgModule({
@@ -29,7 +31,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AdminComponent,
     LingarditosComponent,
     CreateLingarditoComponent,
-    ResultadosComponent    
+    ResultadosComponent,
+    CreatePlayerComponent,
+    ToggleSurveyComponent    
   ],
   imports: [
     BrowserModule,

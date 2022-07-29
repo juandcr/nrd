@@ -6,3 +6,9 @@ export interface VotePlayer{
 export interface Vote{
     players:VotePlayer[]
 }
+
+export interface Player{
+    name:string;
+    role:string;
+    number:number;
+}
