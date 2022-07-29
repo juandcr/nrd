@@ -2,9 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Player } from '../components/models/players.model';
 import { urlBackend } from '../config';
 import { LoginService } from './login.service';
-import { host } from '../constants';
+
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,19 @@ export class LingarditoService {
         return throwError(()=>new Error('No Autorizado'));
       })
     );
+  }
+
+  getRoles():Observable<any>{
+    return this.http.get(`${this.url}/lingarditos/player/roles`,{headers:this.agregarAuthroizationHeaders()}).pipe(
+      catchError(e=>{
+        this.isNotAuthorized(e);
+        return throwError(()=>new Error('No Autorizado'));
+      })
+    );
+  }
+
+  createPlayer(player:Player){
+    return this.http.post(`${this.url}/lingarditos/player`,player,{headers:this.agregarAuthroizationHeaders()});
   }
 
   createJornadaLingardito(titulo:string,players:any){
