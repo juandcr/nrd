@@ -61,9 +61,9 @@ export class ResultadosComponent implements OnInit {
     this.lingarditosService.getJornadaById(jornadaId).subscribe({
       next:(resp:any)=>{      
       this.resultados=resp.jornada;      
-      this.resultados.forEach(r=>{        
-        r.data=[{data:Object.values(r.ratings),label:r.player}]
-        r.labels=Object.keys(r.ratings);        
+      this.resultados.forEach(r=>{
+        r.data=[{data:Object.values(r.ratings)[1],label:r.player}]
+        r.labels=Object.values(r.ratings)[0];
       });      
     },
       error:(e)=>{

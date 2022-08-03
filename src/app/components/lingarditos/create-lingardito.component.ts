@@ -19,7 +19,7 @@ export class CreateLingarditoComponent implements OnInit {
   constructor(private lingarditoService: LingarditoService) {
     lingarditoService.getAllPlayers().subscribe(res => {
       res.players.forEach((p: Player) => {        
-        this.allPlayers.push({ name: p.name, id: p.id, checked: false });
+        this.allPlayers.push({ name: p.name, id: p.id, checked: false, substitute:false });
       });      
     });
   }
@@ -35,7 +35,7 @@ export class CreateLingarditoComponent implements OnInit {
           this.map.set(j.id, j.name);
         });
         this.id = resp.jornada.id;
-        this.allPlayers.forEach((p: { name: string, id: any; checked: boolean; }) => {
+        this.allPlayers.forEach((p: { name: string, id: any, checked: boolean, substitute:boolean}) => {
           if (this.map.has(p.id)) {
             p.checked = true;
           }
@@ -60,8 +60,15 @@ export class CreateLingarditoComponent implements OnInit {
   createLingarditos() {
     let players = new Array();
     this.map.forEach((value: any, key: any) => {
-      players.push({ "id": key });
-    });
+      
+      if(typeof value.substitute === "undefined"){
+        value.substitute=false        
+      }
+      else{
+        value.substitute=true        
+      }
+      players.push({ "id": key, "substitute": value.substitute });
+    });    
     this.lingarditoService.createJornadaLingardito(this.titulo, players).subscribe({
       next: (resp: any) => {
         Swal.fire(
@@ -72,6 +79,7 @@ export class CreateLingarditoComponent implements OnInit {
         this.map.clear();
         this.allPlayers.forEach((p: any) => {
           p.checked = false;
+          p.substitute = false;
         });
         this.titulo = "";
       },
@@ -91,12 +99,17 @@ export class CreateLingarditoComponent implements OnInit {
     let value: boolean = evento.currentTarget.checked
     player.checked = value;
     if (value) {
-      this.map.set(player.id, player.name);
+      this.map.set(player.id, {"player":player.name});
     }
     else {
       this.map.delete(player.id);
-    }
+    }    
   }
 
-
+  isSubstitute(evento: any, player:any){    
+    let value: boolean = evento.currentTarget.checked    
+    if (this.map.has(player.id)){
+      this.map.set(player.id,{"player":player.name,"substitute":value});
+    }
+  }
 }

@@ -40,19 +40,16 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((resp)=>{
         this.socialUser= resp;
-        this.isLogged=true;     
-        console.log(resp);
+        this.isLogged=true;             
         this.loginService.getJWTBackend(resp.idToken).subscribe(resp=>{
           localStorage.setItem("jwt",resp.value)
           let jwt= localStorage.getItem("jwt");    
-          if(jwt){
-            console.log(jwt)
+          if(jwt){            
             let admin= JSON.parse(atob(jwt.split(".")[1])).elevated;
             this.loginService.isAdmin$.next(admin);
           }
-        });
-        
-        this.router.navigate(['/']);
+          this.router.navigate(['/lingarditos/jornada']);
+        });                
       });
     }  
 }
