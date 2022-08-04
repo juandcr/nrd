@@ -28,22 +28,23 @@ export class CreateLingarditoComponent implements OnInit {
   }
 
   getLastLingardito() {
-    this.map.clear();
+    this.map.clear();    
     this.lingarditoService.getLastLingardito().subscribe({
-      next: (resp: { jornada: { id: number, titulo: string, jugadores: [{ id: number, name: string, number: number }] } }) => {
+      next: (resp: { jornada: { id: number, titulo: string, jugadores: [{ id: number, name: string, number: number, substitute:boolean}] } }) => {        
         resp.jornada.jugadores.forEach(j => {
-          this.map.set(j.id, j.name);
+          this.map.set(j.id, j.substitute);
         });
-        this.id = resp.jornada.id;
+        this.id = resp.jornada.id;        
         this.allPlayers.forEach((p: { name: string, id: any, checked: boolean, substitute:boolean}) => {
           if (this.map.has(p.id)) {
-            p.checked = true;
+            p.checked = true;            
+            p.substitute=this.map.get(p.id);
           }
           else {
             p.checked = false;
-          }
+          }          
           this.titulo = resp.jornada.titulo;
-        });
+        });        
       },
       error: (e: any) => {
         if (e.status == 500) {
@@ -59,15 +60,11 @@ export class CreateLingarditoComponent implements OnInit {
 
   createLingarditos() {
     let players = new Array();
-    this.map.forEach((value: any, key: any) => {
-      
-      if(typeof value.substitute === "undefined"){
-        value.substitute=false        
-      }
-      else{
-        value.substitute=true        
-      }
-      players.push({ "id": key, "substitute": value.substitute });
+    this.map.forEach((value: any, key: any) => {      
+      if(typeof value === "undefined"){        
+        value=false        
+      }      
+      players.push({ "id": key, "substitute": value });
     });    
     this.lingarditoService.createJornadaLingardito(this.titulo, players).subscribe({
       next: (resp: any) => {
@@ -76,7 +73,7 @@ export class CreateLingarditoComponent implements OnInit {
           'SIUUU',
           'success'
         );
-        this.map.clear();
+        this.map.clear();        
         this.allPlayers.forEach((p: any) => {
           p.checked = false;
           p.substitute = false;
@@ -99,7 +96,7 @@ export class CreateLingarditoComponent implements OnInit {
     let value: boolean = evento.currentTarget.checked
     player.checked = value;
     if (value) {
-      this.map.set(player.id, {"player":player.name});
+      this.map.set(player.id, player.substitute);
     }
     else {
       this.map.delete(player.id);
@@ -109,7 +106,8 @@ export class CreateLingarditoComponent implements OnInit {
   isSubstitute(evento: any, player:any){    
     let value: boolean = evento.currentTarget.checked    
     if (this.map.has(player.id)){
-      this.map.set(player.id,{"player":player.name,"substitute":value});
-    }
+      this.map.set(player.id,value);
+    }    
+    
   }
 }
