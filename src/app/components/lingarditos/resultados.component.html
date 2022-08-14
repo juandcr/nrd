@@ -19,7 +19,8 @@
             </select>
         </div>
     </div>
-    <div class="row " *ngFor="let resultado of resultados">        
+    <h3 class="mt-2" *ngIf="votos">Votos totales: {{votos}}</h3>
+    <div class="row " *ngFor="let resultado of resultados">
         <div class="col-md-4"></div>
         <div class="col-md-4 mt-5">
             <div style="display: block; ">
