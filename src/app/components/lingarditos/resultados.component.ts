@@ -12,7 +12,8 @@ import { Resultado, Resultados } from '../models/resultados.model';
 })
 export class ResultadosComponent implements OnInit {
 
-  resultados:Resultados[]
+  resultados:Resultados[];
+  votos:number;
 
   chartType = 'pie';
 
@@ -60,7 +61,8 @@ export class ResultadosComponent implements OnInit {
   onChange(jornadaId:string){    
     this.lingarditosService.getJornadaById(jornadaId).subscribe({
       next:(resp:any)=>{      
-      this.resultados=resp.jornada;      
+      this.resultados=resp.jornada;
+      this.votos=resp.votes;
       this.resultados.forEach(r=>{
         r.data=[{data:Object.values(r.ratings)[1],label:r.player}]
         r.labels=Object.values(r.ratings)[0];
