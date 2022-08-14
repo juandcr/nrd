@@ -5,6 +5,7 @@ export interface Resultado{
     rates:[{}]
 }
 export interface Resultados{
+    config: { backgroundColor: string[]; hoverBackgroundColor: string[]; borderWidth: number; }[];
     player:string,
     ratings:Map<number,number>;
     labels:string[];

@@ -64,6 +64,23 @@ export class ResultadosComponent implements OnInit {
       this.resultados=resp.jornada;
       this.votos=resp.votes;
       this.resultados.forEach(r=>{
+        let colorBArray: string[]=[]
+        let colorHArray: string[]=[]
+        let rates= Object.values(r.ratings)[0];
+        rates.forEach((item:string)=>{
+          let index=parseInt(item.split("-")[1]);
+          colorBArray.push(this.chartColors[0].backgroundColor[index])
+          colorHArray.push(this.chartColors[0].hoverBackgroundColor[index])
+        })
+        let chartColors = [
+          {
+            backgroundColor: colorBArray,
+            hoverBackgroundColor: colorHArray,
+            borderWidth: 2,
+          }
+        ];
+        r.config=chartColors;
+        
         r.data=[{data:Object.values(r.ratings)[1],label:r.player}]
         r.labels=Object.values(r.ratings)[0];
       });      
