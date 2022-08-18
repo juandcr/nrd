@@ -19,8 +19,8 @@ export class ResultadosComponent implements OnInit {
 
   chartColors = [
     {
-      backgroundColor: ['#A7464A', '#B6BFBD', '#CDB45C','#D7464A', '#E6BFBD', '#FDB45C','#A7464F', '#A6BFBB', '#BDB45C','#DDB45C'],
-      hoverBackgroundColor: ['#A8464A', '#B7BFBD', '#CEB45C','#D8464A', '#E7BFBD', '#FEB45C','#A8464F', '#A8BFBB', '#BEB45C','#DEB45C'],
+      backgroundColor: ["#ffffff",'#ff0000', '#800000', '#ff9933','#D7464A', '#ffcb00', '#009999','#6699ff', '#00cc99', '#6699ff','#0fb812'],
+      hoverBackgroundColor: ["#ffffff",'#d9a5a7', '#ff3333', '#ffcc99','#f1c0c2', '#ffe066', '#00ffff','#99bbff', '#33ffcc', '#ccddff','#13ec17'],
       borderWidth: 2,
     }
   ];
