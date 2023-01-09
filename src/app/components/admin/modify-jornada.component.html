@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center mt-5">
+
+                <h2>{{titulo}}</h2>
+              </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width:5%" scope="col">Seleccionar</th>
+                    <th style="width:30%" scope="col">Jugador</th>
+                    <th style="width:65%" scope="col">Suplente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let player of allPlayers">
+                  <th scope="row">
+                    <input #value (click)="onChange($event,player)" class="form-check-input" type="checkbox" name="{{player.name}}" id="{{player.id}}" [(ngModel)]="player.checked" checked="{{player.checked}}" >
+                  </th>
+                  <td> <label class="form-check-label" for="{{player.id}}"> - {{player.name}} </label></td>
+                  <td scope="row">
+                    <input #value (click)="isSubstitute($event,player)" class="form-check-input" type="checkbox"  [(ngModel)]="player.substitue" checked="{{player.substitute}}" >
+                  </td>
+                </tr>          
+              </tbody>
+        </table>
+    </div>
+</div>

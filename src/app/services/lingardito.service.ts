@@ -86,5 +86,14 @@ export class LingarditoService {
     return this.http.post(`${this.url}/admin/toggle/lingardito`,{},
     {headers:new HttpHeaders({'Authorization':'Bearer '+ this.loginService.token})});
   }
+
+  getAnnualPerformance(){
+    return this.http.get(`${this.url}/lingarditos/players/performance`,{headers:this.agregarAuthroizationHeaders()}).pipe(
+      catchError(e=>{
+        this.isNotAuthorized(e);
+        return throwError(()=>new Error('No Autorizado'));
+      })
+    );
+  }
 }
 
