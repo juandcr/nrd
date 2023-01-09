@@ -19,6 +19,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CreatePlayerComponent } from './components/admin/create-player.component';
 import { ToggleSurveyComponent } from './components/admin/toggle-survey.component';
+import { ModifyJornadaComponent } from './components/admin/modify-jornada.component';
+import { PerformanceAnualComponent } from './components/lingarditos/performance-anual.component';
 
  
 @NgModule({
@@ -33,7 +35,9 @@ import { ToggleSurveyComponent } from './components/admin/toggle-survey.componen
     CreateLingarditoComponent,
     ResultadosComponent,
     CreatePlayerComponent,
-    ToggleSurveyComponent    
+    ToggleSurveyComponent,
+    ModifyJornadaComponent,
+    PerformanceAnualComponent    
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    
+                    
+                    <th scope="col">Jugador</th>
+                    <th scope="col">Promedio Anual</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let performance of performances">
+                        <th scope="row">{{performance.player}}</th>
+                        <td> <b> {{performance.rate}} </b></td>                        
+                      </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
