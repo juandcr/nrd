@@ -13,6 +13,9 @@
     <li class="nav-item">
       <a class="text-gray nav-link  " id="modify-survey-tab" data-toggle="tab" href="#modify-survey" role="tab" aria-controls="toggle-survey" aria-selected="false">Modificar última encuesta</a>
     </li>    
+    <li class="nav-item">
+      <a class="text-gray nav-link  " id="annual-performance-tab" data-toggle="tab" href="#annual-performance" role="tab" aria-controls="toggle-survey" aria-selected="false">Desempeño jugadores</a>
+    </li>    
   </ul>
   <div class="tab-content mb-5" id="myTabContent">
     <div class="container tab-pane fade show active" id="create-player" role="tabpanel" aria-labelledby="create-player-tab">
@@ -24,4 +27,9 @@
     <div class="container tab-pane fade " id="modify-survey" role="tabpanel" aria-labelledby="modify-survey-tab">
       <app-modify-jornada></app-modify-jornada>
   </div>
+  <div class="container tab-pane fade " id="annual-performance" role="tabpanel" aria-labelledby="annual-performance-tab">
+    <app-performance-anual></app-performance-anual>
+  </div>
+
+
   </div>
